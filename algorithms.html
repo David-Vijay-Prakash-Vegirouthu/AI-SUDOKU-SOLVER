@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Solver - Algorithms</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sudoku Solver Algorithms</h1>
+        
+        <div class="navigation">
+            <a href="index.html">Sudoku Game</a>
+            <a href="algorithms.html" class="active">Algorithms</a>
+        </div>
+        
+        <div class="algorithms-content">
+            <div class="algorithm-section">
+                <h2>Breadth-First Search (BFS)</h2>
+                <div class="algorithm-details">
+                    <h3>Description</h3>
+                    <p>BFS explores all possible values for each empty cell level by level, expanding in a breadth-first manner. It starts by trying all possible values for the first empty cell, then moves to the next empty cell.</p>
+                    
+                    <h3>Advantages</h3>
+                    <ul>
+                        <li>Guarantees finding the solution if one exists</li>
+                        <li>Finds the solution with the minimum number of steps</li>
+                        <li>Systematically explores the search space</li>
+                    </ul>
+                    
+                    <h3>Disadvantages</h3>
+                    <ul>
+                        <li>Memory intensive (needs to store all states at each level)</li>
+                        <li>Can be slower than other algorithms for large puzzles</li>
+                        <li>Not as efficient for Sudoku compared to DFS due to high branching factor</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="algorithm-section">
+                <h2>Depth-First Search (DFS)</h2>
+                <div class="algorithm-details">
+                    <h3>Description</h3>
+                    <p>DFS explores one path completely before backtracking. It fills cells one by one, trying all valid digits for each cell and backtracking when it reaches an invalid state.</p>
+                    
+                    <h3>Advantages</h3>
+                    <ul>
+                        <li>Memory efficient (only needs to store the current path)</li>
+                        <li>Often finds a solution quickly in practice for Sudoku</li>
+                        <li>Well-suited for puzzles with constraints like Sudoku</li>
+                    </ul>
+                    
+                    <h3>Disadvantages</h3>
+                    <ul>
+                        <li>May get stuck in deep paths that don't lead to a solution</li>
+                        <li>Does not guarantee finding the optimal solution</li>
+                        <li>Performance depends on the order of cell exploration</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="algorithm-section">
+                <h2>A* Algorithm</h2>
+                <div class="algorithm-details">
+                    <h3>Description</h3>
+                    <p>A* is an informed search algorithm that uses a heuristic function to guide the search. For Sudoku, the heuristic can be based on the number of constraints satisfied or remaining empty cells.</p>
+                    
+                    <h3>Advantages</h3>
+                    <ul>
+                        <li>More efficient than blind search algorithms like BFS or DFS</li>
+                        <li>Guarantees finding the optimal solution if heuristic is admissible</li>
+                        <li>Combines the benefits of BFS and greedy best-first search</li>
+                    </ul>
+                    
+                    <h3>Disadvantages</h3>
+                    <ul>
+                        <li>Requires a good heuristic function, which can be tricky to design for Sudoku</li>
+                        <li>More complex to implement than BFS or DFS</li>
+                        <li>Memory usage can be high depending on the heuristic</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="algorithm-section">
+                <h2>Algorithm Comparison</h2>
+                <div class="algorithm-details">
+                    <p>For Sudoku puzzles specifically:</p>
+                    <ul>
+                        <li><strong>DFS</strong> is often the most practical choice due to its memory efficiency and the constraint-based nature of Sudoku.</li>
+                        <li><strong>BFS</strong> can be prohibitively slow and memory-intensive for difficult puzzles.</li>
+                        <li><strong>A*</strong> can be very efficient with a good heuristic but requires careful design of the heuristic function.</li>
+                    </ul>
+                    <p>Try each algorithm on the Sudoku page to see the differences in performance!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

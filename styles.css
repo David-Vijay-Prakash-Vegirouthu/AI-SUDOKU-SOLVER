@@ -1,0 +1,880 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+}
+
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --light-color: #ecf0f1;
+    --dark-color: #2c3e50;
+    --highlight-color: #e6f2ff;
+    --block-color: #d4e6f1;
+    --fixed-color: #34495e;
+    --user-color: #27ae60;
+    --solved-color: #3498db;
+    --error-color: #e74c3c;
+    --processing-color: #f1c40f;
+    --purple-color: #9b59b6;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --border-radius: 8px;
+}
+
+body {
+    background-color: #f5f5f5;
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 850px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(to right, var(--secondary-color), var(--success-color));
+    border-radius: 10px;
+}
+
+/* Navigation */
+.navigation {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.navigation a {
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    color: var(--dark-color);
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+    flex: 1;
+    text-align: center;
+}
+
+.navigation a:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.navigation a.active {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.navigation a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+/* Controls */
+.controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.mode-selection, .algorithm-selection, .difficulty-selection, .puzzle-creation-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.mode-selection label, .algorithm-selection label, .difficulty-selection label, .puzzle-creation-options label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.mode-options, .puzzle-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mode-options label, .puzzle-options label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: normal;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.mode-options label:hover, .puzzle-options label:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.mode-options input[type="radio"], .puzzle-options input[type="radio"] {
+    margin-right: 8px;
+    cursor: pointer;
+    accent-color: var(--secondary-color);
+}
+
+.algorithm-selection select, .difficulty-selection select {
+    padding: 0.7rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%232c3e50' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 1em;
+    padding-right: 2.5em;
+}
+
+.algorithm-selection select:focus, .difficulty-selection select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
+}
+
+/* Upload section styles */
+.upload-section, .manual-input-section {
+    display: none; /* Hidden by default, shown based on selection */
+    flex-direction: column;
+    grid-column: 1 / -1;
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: var(--border-radius);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.upload-section label, .manual-input-section label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.upload-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0.5rem 0;
+}
+
+#sudoku-upload {
+    flex: 1;
+    background-color: white;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.manual-input-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.manual-input-info p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+#upload-btn, #set-puzzle-btn, #clear-input-btn {
+    padding: 0.5rem 1rem;
+    background: linear-gradient(to right, #9b59b6, #8e44ad);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#upload-btn:hover, #set-puzzle-btn:hover, #clear-input-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#upload-btn:active, #set-puzzle-btn:active, #clear-input-btn:active {
+    transform: translateY(1px);
+}
+
+.upload-info {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.5rem;
+    line-height: 1.4;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.action-buttons button {
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: var(--border-radius);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-width: 130px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.action-buttons button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+}
+
+.action-buttons button:hover::before {
+    left: 100%;
+}
+
+.action-buttons button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.action-buttons button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#solve-btn {
+    background: linear-gradient(to right, #2ecc71, #27ae60);
+}
+
+#show-answer-btn {
+    background: linear-gradient(to right, #3498db, #2980b9);
+}
+
+#check-btn {
+    background: linear-gradient(to right, #f39c12, #e67e22);
+}
+
+#new-btn {
+    background: linear-gradient(to right, #3498db, #2980b9);
+}
+
+#clear-btn {
+    background: linear-gradient(to right, #e74c3c, #c0392b);
+}
+
+#export-btn {
+    background: linear-gradient(to right, #9b59b6, #8e44ad);
+}
+
+/* Sudoku Grid */
+.sudoku-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    perspective: 1000px;
+}
+
+.sudoku-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    gap: 1px;
+    border: 2px solid var(--dark-color);
+    width: 450px;
+    height: 450px;
+    background-color: var(--dark-color);
+    box-shadow: var(--box-shadow);
+    transition: box-shadow 0.3s;
+}
+
+.sudoku-grid:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+} 
+
+@keyframes appear {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    animation: appear 0.3s ease forwards;
+}
+
+.cell:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.cell:active {
+    transform: scale(0.95);
+}
+
+.cell.highlight {
+    background-color: var(--highlight-color);
+}
+
+/* Highlight 3x3 blocks */
+.cell.block-0, .cell.block-2, .cell.block-4, .cell.block-6, .cell.block-8 {
+    background-color: var(--block-color);
+}
+
+/* Cell states and animations */
+.cell.fixed {
+    font-weight: bold;
+    color: var(--fixed-color);
+}
+
+.cell.user-input {
+    color: var(--user-color);
+    font-weight: normal;
+}
+
+.cell.error {
+    color: var(--error-color);
+    animation: shake 0.5s;
+}
+
+.cell.input-mode {
+    color: var(--purple-color);
+    font-weight: bold;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+.cell.processing {
+    background-color: var(--processing-color);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.cell.solved {
+    color: var(--solved-color);
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Grid borders for 3x3 blocks */
+.sudoku-grid .cell:nth-child(3n) {
+    border-right: 2px solid var(--dark-color);
+}
+
+.sudoku-grid .cell:nth-child(9n) {
+    border-right: none;
+}
+
+.sudoku-grid .cell:nth-child(n+19):nth-child(-n+27),
+.sudoku-grid .cell:nth-child(n+46):nth-child(-n+54) {
+    border-bottom: 2px solid var(--dark-color);
+}
+
+/* Modal styles */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.modal.active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.modal p {
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.modal-buttons button {
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.modal-buttons .primary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.modal-buttons .secondary {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+/* Stats */
+.stats {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+    color: var(--dark-color);
+}
+
+.stats div {
+    background-color: var(--light-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#status {
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+/* Algorithm Page Styles */
+.algorithms-content {
+    padding: 1rem;
+}
+
+.algorithm-section {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1.5rem;
+    animation: fadeIn 0.5s;
+}
+
+.algorithm-section:last-child {
+    border-bottom: none;
+}
+
+.algorithm-section h2 {
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+    position: relative;
+    padding-left: 1rem;
+}
+
+.algorithm-section h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+}
+
+.algorithm-details h3 {
+    margin: 1rem 0 0.5rem 0;
+    color: var(--dark-color);
+    font-size: 1.1rem;
+}
+
+.algorithm-details p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.algorithm-details ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.algorithm-details li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+/* Animation when algorithm solves */
+@keyframes solveAnimation {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.solving .sudoku-grid {
+    animation: solveAnimation 2s infinite;
+}
+
+/* Loader for processing */
+.loader {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--light-color);
+    border-top: 4px solid var(--secondary-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Algorithm selection modal */
+.algorithm-modal-overlay, .solution-modal-overlay, .input-mode-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.algorithm-modal, .solution-modal, .input-mode-modal {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.algorithm-modal.active, .solution-modal.active, .input-mode-modal.active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.algorithm-modal h2, .solution-modal h2, .input-mode-modal h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.algorithm-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.algorithm-option:hover {
+    background-color: var(--light-color);
+}
+
+.algorithm-option.selected {
+    border-color: var(--secondary-color);
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.algorithm-icon {
+    margin-right: 1rem;
+    width: 40px;
+    height: 40px;
+    background-color: var(--light-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+.algorithm-info {
+    flex: 1;
+}
+
+.algorithm-info h3 {
+    margin-bottom: 0.3rem;
+    color: var(--dark-color);
+}
+
+.algorithm-info p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.algorithm-modal-buttons, .solution-modal-buttons, .input-mode-modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.algorithm-modal-buttons button, .solution-modal-buttons button, .input-mode-modal-buttons button {
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.algorithm-modal-buttons .start-btn, .solution-modal-buttons .show-btn, .input-mode-modal-buttons .got-it-btn {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.algorithm-modal-buttons .cancel-btn, .solution-modal-buttons .continue-btn {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+/* Number animation */
+@keyframes number-change {
+    0% { transform: scale(0.5); opacity: 0; }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.cell.number-changed {
+    animation: number-change 0.3s ease;
+}
+
+/* Number picker for cell input */
+.number-picker {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.number-option {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.1s, background-color 0.2s;
+}
+
+.number-option:hover {
+    transform: scale(1.05);
+    background-color: var(--primary-color);
+}
+
+.number-option.clear {
+    background-color: var(--danger-color);
+}
+
+/* Toast notifications */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+.toast.info {
+    background-color: var(--secondary-color);
+}
+
+.toast.success {
+    background-color: var(--success-color);
+}
+
+.toast.warning {
+    background-color: var(--warning-color);
+}
+
+.toast.error {
+    background-color: var(--danger-color);
+}
+
+/* Responsive Design */
+@media (max-width: 700px) {
+    .container {
+        padding: 1.5rem;
+    }
+    
+    .controls {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .action-buttons button {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .sudoku-grid {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1/1;
+    }
+    
+    .cell {
+        font-size: 1rem;
+    }
+    
+    .stats {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+    }
+    
+    .stats div {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .action-buttons button {
+        padding: 0.7rem 1rem;
+    }
+    
+    .cell {
+        font-size: 0.9rem;
+    }
+} 
